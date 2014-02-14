@@ -39,18 +39,17 @@ Complexity:
 Elements of input arrays can be modified.
 '''
 
-
-def negabinary(i, mod):
+def dec_to_base(i, base):
     bin_stack = []
     while i != 0:
-        i, rem = divmod(i, mod)
+        i, rem = divmod(i, base)
         if rem < 0:
-            i, rem = i + 1, rem + abs(mod) 
+            i, rem = i + 1, rem + abs(base) 
         bin_stack.append(rem)
     return bin_stack
 
 
-def to_dec(bin_num, base):
+def base_to_dec(bin_num, base):
     result = 0
     for i, elem in enumerate(bin_num):
         result += elem * (base)**i
@@ -82,8 +81,8 @@ if __name__ == "__main__":
     A = 5730
     B = -2396
     base = -2
-    bin_a = negabinary(A, base)
-    bin_b = negabinary(B, base)
+    bin_a = dec_to_bin(A, base)
+    bin_b = dec_to_bin(B, base)
     bin_c = solution(bin_a, bin_b)
-    print(bin_c, to_dec(bin_c, base))
+    print(bin_c, base_to_dec(bin_c, base))
     #C = [0,1,0,1,1,0,0,0,1,0,1,1,1] 3334 
