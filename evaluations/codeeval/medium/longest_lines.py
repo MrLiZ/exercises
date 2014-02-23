@@ -15,7 +15,7 @@ if __name__ == "__main__":
         with open(arg, "r") as f:
             nlines = int(f.readline())
             for line in f:
-                if line:
+                if line.strip():
                     heapq.heappush(heap, (len(line), line.strip()))
     except IOError:
         print(traceback.format_exc())
