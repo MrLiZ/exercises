@@ -9,7 +9,7 @@ import math
 def sieve(n):
     "Return all primes <= n."
     np1 = n + 1
-    s = range(np1) # leave off `list()` in Python 2
+    s = range(np1)
     s[1] = 0
     sqrtn = int(round(n**0.5))
     for i in xrange(2, sqrtn + 1):
@@ -19,7 +19,7 @@ def sieve(n):
 
 
 def primes_Tim(prime, n):
-    """Tim Peters solution"""
+    """Tim Peters solution with sieve (slow)"""
     primes = set(sieve(n))
     return True if prime in primes else False
 
