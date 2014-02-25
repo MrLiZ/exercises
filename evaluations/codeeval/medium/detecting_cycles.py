@@ -9,21 +9,25 @@ import traceback
 def floyd(seq):
     """Floyd's cycle-finding algorithm adapted
        (http://en.wikipedia.org/wiki/Cycle_detection)"""
-    if len(seq) == 1:
-        return -1, None
-    if len(seq) == 2:
+    print(seq)
+    length = len(seq)
+    if length == 1:
+        return (-1, None)
+    if length == 2:
         return (0, 1) if seq[0] == seq[1] else (-1, None)
         
     t = 1
     h = 2
-    length = len(seq) - 1
     tortoise = seq[t]
     hare = seq[h]
     while tortoise != hare:
         t += 1
         tortoise = seq[t]
-        h = min(h + 2, length)
+        h = h + 2 if h + 2 < length else length - 1
         hare = seq[h]
+    print("{} {}".format(t, h))
+
+    aux = h 
  
     mu = 0
     t = 0
@@ -31,19 +35,33 @@ def floyd(seq):
     while tortoise != hare:
         t += 1
         tortoise = seq[t]
-        h = min(h + 1, length)
+        h = h + 1 if h + 1 <= length else aux 
         hare = seq[h]
         mu += 1
+    print("{} {}".format(t, h))
  
     lam = 1
-    h = min(t + 1, length)
+    h = t + 1 if t + 1 < length else length
     hare = seq[h]
     while tortoise != hare:
-        h = min(h + 1, length)
+        h = h + 1 if h + 1 < length else length
         hare = seq[h]
         lam += 1
+    print("{} {}".format(t, h))
 
-    return (-1, None) if t == h else (mu, lam)
+    return t, h
+
+
+def find_cycles(seq):
+    """"""
+    aux = {}
+    for i, elem in enumerate(seq):
+        if elem not in aux:
+            aux[elem] = i
+        else:
+            init = aux[elem]
+            return seq[init:i]
+    return []
 
 
 if __name__ == "__main__":
@@ -54,11 +72,12 @@ if __name__ == "__main__":
             for line in f:
                 splitted = line.strip().split()
                 if splitted:
-                    init, length = floyd(splitted)
+                    '''init, end = floyd(splitted)
                     if init != -1: 
-                        print(" ".join(splitted[init:init+length]))
-                    else:
-                        print("No cycles")
+                        print(" ".join(splitted[init:end]))'''
+                    cycle = find_cycles(splitted)
+                    if cycle:
+                        print(" ".join(cycle))
     except IOError:
         print(traceback.format_exc())
 
