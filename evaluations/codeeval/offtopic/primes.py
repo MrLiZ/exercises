@@ -68,6 +68,26 @@ def gen_primes():
         q += 1
 
 
+def prime_factors(n):
+    """Returns all the prime factors of a positive integer"""
+    primes = gen_primes()
+    d = primes.next()
+    aux = n
+    factors = {}
+    while aux > 1:
+        while aux % d == 0:
+            #yield d
+            factors[d] = 1 if d not in factors else factors[d] + 1
+            aux /= d
+        d = primes.next()
+        if d*d > aux:
+            if aux > 1 and aux != n:
+                #yield aux 
+                factors[aux] = 1 if aux not in factors else factors[aux] + 1
+            break
+    return factors
+
+
 if __name__ == "__main__":
 
     prime = 982451653
