@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*-coding:utf8-*-
 
 '''
 Four integers A, B, C and D are given. A shuffle of them is any zero-indexed array S consisting of these four integers in some order. If all the given integers are unique, then there are 24 different shuffles of them.

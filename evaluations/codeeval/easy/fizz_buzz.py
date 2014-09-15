@@ -17,11 +17,14 @@ def fizz_buzz(A, B, N):
     """"""
     result = []
     for i in xrange(1, N + 1):
-        if i != 0 and i % A == 0 and i % B == 0:
+        #if i != 0 and i % A == 0 and i % B == 0:
+        a_res = i % A
+        b_res = i % B
+        if a_res == 0 and b_res == 0:
             result.append("FB")
-        elif i % A == 0:
+        elif a_res == 0:
             result.append("F")
-        elif i % B == 0:
+        elif b_res == 0:
             result.append("B")
         else:
             result.append(i)
@@ -34,7 +37,8 @@ if __name__ == "__main__":
     try:
         with open(args.input_file, "r") as f:
             for line in f:
-                params = [int(param) for param in line.split()]
+                params = map(int, line.split())
+                #params = [int(param) for param in line.split()]
                 serie = fizz_buzz(*params)
                 print(" ".join(map(str, serie)))
     except IOError as err:
